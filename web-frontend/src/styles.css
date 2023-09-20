@@ -1,0 +1,85 @@
+.Canvas{
+    width: 100vw;
+    height: 100vh;
+    background-color: #333;
+    position:absolute;
+    left:0;
+    top:0;
+}
+
+.mobileContainer {
+    background-color: #2c2c2c;
+    padding: 4vw;
+    border-radius: 2vw;
+    width: 90vw;
+    margin: 5vh auto;
+}
+
+.inputGroup {
+    margin-bottom: 3vh;
+    display:block;
+}
+
+.label {
+    display: block;
+    margin-bottom: 1vh;
+    color: #f5f5f5;
+}
+
+.input {
+    width: 95%;
+    padding: 2vw;
+    border-radius: 1vw;
+    background-color: #3a3a3a;
+    color: #f5f5f5;
+    border: 0.2vw solid #555;
+}
+
+.button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 2vw 4vw;
+    border: none;
+    border-radius: 1vw;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.warning {
+    border: 0.2vw solid yellow;
+}
+
+.warningText {
+    margin-bottom: 2vh;
+    color: yellow;
+    text-align:center;
+}
+
+.submissionMessage {
+    margin-top: 2vh;
+    color: #f5f5f5;
+    text-align:center;
+}
+.textInput {
+    height:15vh;
+
+}
+
+.title {
+    padding:3vw;
+    color: #f5f5f5;
+    font-size: 5vw;
+    text-align: center;
+    margin-bottom: 4vh;
+}
+
+
+.submissionMessage {
+    margin-top: 2vh;
+    color: #f5f5f5;
+}
