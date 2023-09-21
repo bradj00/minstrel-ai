@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useContext } from 'react';
+import { generalContext } from '../App.js';
 import '../styles.css';
 
 const DailyRecapForm = () => {
@@ -8,11 +9,9 @@ const DailyRecapForm = () => {
     const [submitAttempted, setSubmitAttempted] = useState(false);
     const [submissionMessage, setSubmissionMessage] = useState('');
 
-    const feelingRef = useRef(null);
-    const workedOnRef = useRef(null);
-    const goalsRef = useRef(null);
+    const { message, setMessage } = useContext(generalContext);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
         if (!feeling || !workedOn || !goals) {
@@ -26,72 +25,52 @@ const DailyRecapForm = () => {
         }
     };
 
-    const submitData = async () => {
+    const submitData = () => {
         const recapData = {
             feeling,
             workedOn,
             goals,
         };
 
-        // POST the data to a fake REST API endpoint
-        try {
-            const response = await fetch('https://fakeapi.com/endpoint', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(recapData),
-            });
+        // Set the message context variable
+        setMessage(recapData);
+        console.log("Set message context variable to:", recapData);
 
-            if (response.ok) {
-                setFeeling('');
-                setWorkedOn('');
-                setGoals('');
-                setSubmissionMessage('Submitted. Thank you!');
-            } else {
-                setSubmissionMessage('Failed to submit. Please try again.');
-            }
-        } catch (error) {
-            setSubmissionMessage('Error occurred. Please try again.');
-        }
+        setFeeling('');
+        setWorkedOn('');
+        setGoals('');
+        setSubmissionMessage('Data recorded. Thank you!');
     };
 
     return (
         <div className="mobileContainer">
             <div className="title">Daily Recap</div>
-
             <form onSubmit={handleSubmit}>
                 <div className="inputGroup">
                     <label className="label">Today I'm feeling:</label>
                     <textarea 
-                        ref={feelingRef}
                         value={feeling} 
                         onChange={(e) => setFeeling(e.target.value)} 
                         className={`input ${submitAttempted && !feeling ? 'warning' : 'textInput'}`}
                     />
-                    
                 </div>
 
                 <div className="inputGroup">
                     <label className="label">Today I worked on:</label>
                     <textarea 
-                        ref={workedOnRef}
                         value={workedOn} 
                         onChange={(e) => setWorkedOn(e.target.value)} 
                         className={`input ${submitAttempted && !workedOn ? 'warning' : 'textInput'}`}
                     />
-                    
                 </div>
 
                 <div className="inputGroup">
                     <label className="label">Goals to declare today:</label>
                     <textarea 
-                        ref={goalsRef}
                         value={goals} 
                         onChange={(e) => setGoals(e.target.value)} 
                         className={`input ${submitAttempted && !goals ? 'warning' : 'textInput'}`}
                     />
-                    
                 </div>
 
                 {submitAttempted && (!feeling || !workedOn || !goals) && 
